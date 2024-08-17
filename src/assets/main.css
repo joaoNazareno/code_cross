@@ -10,8 +10,8 @@
 a,
 .green {
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
+  color: rgb(54, 94, 240);
+  transition: color 0.4s, background-color 0.4s;
   padding: 3px;
 }
 
@@ -24,7 +24,7 @@ a,
 @media (min-width: 1024px) {
   body {
     display: flex;
-    place-items: center;
+    align-items: center;
   }
 
   #app {

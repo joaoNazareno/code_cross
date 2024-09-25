@@ -6,7 +6,7 @@
 
 <br>
 
-[![Typing SVG](https://readme-typing-svg.herokuapp.com/?color=000000&color2=00BFFF&size=35&center=true&vCenter=true&width=1000&lines=Code+Cross;Desafie-se+nesse+mapa+repleto+de+armadilhas!)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.herokuapp.com/?color=DC143C&size=35&center=true&vCenter=true&width=1000&lines=Code+Cross;Desafie-se+nesse+mapa+repleto+de+armadilhas!)](https://git.io/typing-svg)
 
 
 <div align="center">
@@ -17,7 +17,7 @@
 
 **Code Cross** é um jogo desafiador onde o jogador deve atravessar um mapa cheio de perigos e alcançar a linha de chegada.
 
-## O que é o projeto
+## Objetivo
 
 O objetivo do jogo é guiar o personagem até o final do mapa. Durante o percurso, o jogador precisa evitar cair nas águas com pontas de lanças, pois ao cair, ele "morre" e o jogo reinicia. Se o jogador chegar à linha de chegada, ele é levado de volta ao início para um novo desafio.
 

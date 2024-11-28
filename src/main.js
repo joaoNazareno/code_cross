@@ -1,4 +1,4 @@
-import './assets/main.css'
+import './styles/styles.css'
 
 import { createApp } from 'vue'
 import App from './App.vue'
@@ -6,6 +6,6 @@ import router from './router'
 
 const app = createApp(App);
 
-app.use(router); // Use router, not user
+app.use(router); 
 
 app.mount('#app');

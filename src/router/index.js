@@ -1,17 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import TelaPrincipalCodeCross from '../components/tela_principal_code_cross.vue';
-import PlayCodeCross from '../components/play_code_cross.vue';
+import JogoCodeCross from '../views/jogo_code_cross.vue';
 
 const routes = [
   {
-    path: '/principal',
-    name: 'principal',
-    component: TelaPrincipalCodeCross
-  },
-  {
-    path: '/play',
-    name: 'play',
-    component: PlayCodeCross
+    path: '/jogo',
+    name: 'jogo',
+    component: JogoCodeCross
   }
 ];
 

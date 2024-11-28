@@ -1,0 +1,32 @@
+@import '/src/styles/styles.css';
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+}
+
+button:focus {
+    outline: 0;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+table {
+    padding: 0;
+    border-spacing: 0;
+}
+
+input {
+    border: none;
+}
+
+input:focus {
+    border: none;
+}

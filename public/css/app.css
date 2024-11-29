@@ -1,0 +1,43 @@
+header {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center;
+  width: 100%;
+  padding: 5rem;
+}
+
+.logo {
+  max-width: 650px; 
+  height: auto;
+  margin-bottom: 20px; 
+}
+
+.play {
+  display: flex;
+  justify-content: center; 
+  width: 100%;
+}
+.footer {
+  display: flex;
+  align-items: center;
+  padding: 12px; 
+  margin: auto;
+}
+@media (min-width: 750px) {
+  header {
+    flex-direction: row; 
+    align-items: center;
+    justify-content: center; 
+  }
+
+  .logo {
+    margin-right: 1rem; 
+    margin-bottom: 0; 
+  }
+
+  .play {
+    justify-content: flex-start; 
+    width: auto;
+  }
+}

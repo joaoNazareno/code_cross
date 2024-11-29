@@ -1,31 +1,27 @@
 <template>
   <div id="jogo-container">
     <div id="jogo">
-      <canvas id="canvas" width="4000" height="1720"></canvas>
-      <div>
-        <canvas id="canvas" width="1" height=""></canvas>
-        <iframe
-          v-if="jogoEmGameOver"
-          src="https://i.giphy.com/qtgkm1xVilBFWD63CT.webp"
-          width="1000"
-          height="800"
-          style="border: none;"
-          frameborder="0"
-          allowfullscreen>
-        </iframe>
-      </div>
-      <div>
-        <canvas id="canvas" width="1" height="1"></canvas>
-        <iframe
-          v-if="jogoEmVitoria"
-          src="https://giphy.com/embed/1fnxuaZ0nLOyjQX8CC"
-          width="1000"
-          height="800"
-          style="border: none;"
-          frameborder="0"
-          allowfullscreen>
-        </iframe>
-      </div>
+      <canvas id="canvas" :width="2200" height="1700"></canvas>
+      <!-- Game Over Frame -->
+      <iframe
+        v-if="jogoEmGameOver"
+        src="https://i.giphy.com/qtgkm1xVilBFWD63CT.webp"
+        width="100"
+        height="100"
+        style="border: none;"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
+      <!-- Vitória Frame -->
+      <iframe
+        v-if="jogoEmVitoria"
+        src="https://giphy.com/embed/1fnxuaZ0nLOyjQX8CC"
+        width="1000"
+        height="800"
+        style="border: none;"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
     </div>
   </div>
 </template>
@@ -36,8 +32,7 @@ export default {
   data() {
     return {
       mapa: [
-        // 55 = ⭢ 
-        // 40 = ⭣
+        // 55 = ⭢ , 40 = ⭣
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -97,167 +92,112 @@ export default {
   },
 
   methods: {
-  iniciarJogo() {
-    this.desenharMapa();
-    this.desenharJogador();
-    window.addEventListener('keydown', this.movimentarJogador);
-    this.iniciarGravidade();
-  },
+    iniciarJogo() {
+      this.desenharMapa();
+      this.desenharJogador();
+      window.addEventListener('keydown', this.movimentarJogador);
+      this.iniciarGravidade();
+    },
 
-  desenharMapa() {
-    const canvas = document.getElementById('canvas');
-    const contexto = canvas.getContext('2d');
-    const tileSize = 40; 
+    desenharMapa() {
+      const canvas = document.getElementById('canvas');
+      const contexto = canvas.getContext('2d');
+      const tileSize = 40;
 
-    console.log('Desenhando mapa...'); 
+      contexto.clearRect(0, 0, canvas.width, canvas.height);
 
-  
-    contexto.clearRect(0, 0, canvas.width, canvas.height);
-
-    for (let y = 0; y < this.mapa.length; y++) {
-      for (let x = 0; x < this.mapa[y].length; x++) {
-        if (this.mapa[y][x] === 0) {
-          contexto.fillStyle = 'black'; 
-        } else if (this.mapa[y][x] === 2) {
-          contexto.fillStyle = 'blue'; 
-        } else if (this.mapa[y][x] === 4) {
-          contexto.fillStyle = 'white'; 
-        } else {
-          contexto.fillStyle = 'white'; 
+      for (let y = 0; y < this.mapa.length; y++) {
+        for (let x = 0; x < this.mapa[y].length; x++) {
+          const tile = this.mapa[y][x];
+          if (tile === 0) contexto.fillStyle = 'black'; 
+          else if (tile === 2) contexto.fillStyle = 'blue'; 
+          else if (tile === 4) contexto.fillStyle = 'white'; 
+          else contexto.fillStyle = 'white'; 
+          contexto.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
         }
-        contexto.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
       }
-    }
-  },
+    },
 
-  desenharJogador() {
-    const canvas = document.getElementById('canvas');
-    const contexto = canvas.getContext('2d');
-    const { x, y, largura, altura } = this.jogador;
+    desenharJogador() {
+      const canvas = document.getElementById('canvas');
+      const contexto = canvas.getContext('2d');
+      const { x, y, largura, altura } = this.jogador;
+      contexto.fillStyle = 'red';
+      contexto.fillRect(x * largura, y * altura, largura, altura); 
+    },
 
-   
-    contexto.fillStyle = 'red';
-    contexto.fillRect(x * largura, y * altura, largura, altura); 
-  },
+    exibirGameOver() {
+      this.jogoEmGameOver = true;
+      setTimeout(() => {
+        this.jogoEmGameOver = false;
+        this.jogador.x = 2; 
+        this.jogador.y = 2;
+        this.atualizarTela(); 
+      }, 3000); 
+    },
 
-  exibirGameOver() {
-    this.jogoEmGameOver = true; 
+    vitoria() {
+      this.jogoEmVitoria = true;
+      setTimeout(() => {
+        this.jogoEmVitoria = false;
+      }, 3000); 
+    },
 
-    setTimeout(() => {
-      this.jogoEmGameOver = false; 
-      this.jogador.x = 2; 
-      this.jogador.y = 2;
-      this.atualizarTela(); 
-    }, 3000); 
-  },
+    movimentarJogador(event) {
+      switch (event.key) {
+        case 'ArrowUp':
+          if (this.mapa[this.jogador.y - 1][this.jogador.x] !== 0) {
+            this.jogador.y--;
+          }
+          break;
+        case 'ArrowDown':
+          if (this.mapa[this.jogador.y + 1][this.jogador.x] !== 0) {
+            this.jogador.y++;
+          }
+          break;
+        case 'ArrowLeft':
+          if (this.mapa[this.jogador.y][this.jogador.x - 1] !== 0) {
+            this.jogador.x--;
+          }
+          break;
+        case 'ArrowRight':
+          if (this.mapa[this.jogador.y][this.jogador.x + 1] !== 0) {
+            this.jogador.x++;
+          }
+          break;
+      }
+      this.checarColisao();
+    },
 
-  vitoria() {
-    this.jogoEmVitoria = true;
-
-    setTimeout(() => {
-      this.jogoEmVitoria = false; 
-      this.jogador.x = 4; 
-      this.jogador.y = 4;
-      this.atualizarTela(); 
-    }, 4000); 
-  },
-
-  movimentarJogador(event) {
-    const teclasPermitidas = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
-    if (!teclasPermitidas.includes(event.key)) {
-      return; 
-    }
-
-    console.log('Tecla pressionada:', event.key); 
-
-    const { jogador, mapa } = this;
-    let novoX = jogador.x;
-    let novoY = jogador.y;
-
-    switch (event.key) {
-      case 'ArrowUp':
-        if (mapa[jogador.y - 1] && mapa[jogador.y - 1][jogador.x] !== 0) {
-          novoY = jogador.y - 2;
-        }
-        break;
-      case 'ArrowDown':
-        if (mapa[jogador.y + 1] && mapa[jogador.y + 1][jogador.x] !== 0) {
-          novoY = jogador.y + 1;
-        }
-        break;
-      case 'ArrowLeft':
-        if (mapa[jogador.y][jogador.x - 1] !== 0) {
-          novoX = jogador.x - 1;
-        }
-        break;
-      case 'ArrowRight':
-        if (mapa[jogador.y][jogador.x + 1] !== 0) {
-          novoX = jogador.x + 1;
-        }
-        break;
-    }
-
-    
-    const novoTile = mapa[novoY][novoX];
-
-    if (novoTile === 2) {
-      this.exibirGameOver(); 
-    } else if (novoTile === 4) {
-       this.vitoria();
-    } else if (novoTile === 1 || novoTile === 3) {
-    
-      jogador.x = novoX;
-      jogador.y = novoY;
-    } else {
-      console.log('Movimento bloqueado: tile inválido.');
-    }
-
-   
-    this.atualizarTela();
-  },
-
-    iniciarGravidade() {
-      setInterval(() => {
-        const { jogador, mapa } = this;
-        const novoY = jogador.y + 1;
-
-       
-        if (novoY < mapa.length && mapa[novoY][jogador.x] !== 0) {
-          
-          jogador.y = novoY;
-          this.atualizarTela();
-        }
-      }, 100); 
+    checarColisao() {
+      const tile = this.mapa[this.jogador.y][this.jogador.x];
+      if (tile === 2) { 
+        this.exibirGameOver();
+      } else if (tile === 4) {
+        this.vitoria();
+      } else {
+        this.atualizarTela();
+      }
     },
 
     atualizarTela() {
-      if (!this.jogoEmGameOver && !this.jogoEmVitoria){
       this.desenharMapa();
       this.desenharJogador();
+    },
+
+    iniciarGravidade() {
+      setInterval(() => {
+        if (this.mapa[this.jogador.y + 1][this.jogador.x] === 1) {
+          this.jogador.y++;
+        }
+        this.atualizarTela();
+      }, 100);
     }
-  }
   }
 };
 </script>
 
 <style scoped>
-#jogo {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-image: url('/src/assets/img/img_jogo_code_cross.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-}
-
-#canvas {
-  border: 1px solid black;
-}
+@import '/public/css/jogo.css';
 </style>
+

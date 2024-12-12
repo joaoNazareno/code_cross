@@ -26,14 +26,21 @@
   display: block;
   max-width: 90%;
   height: auto;
-  background-color: #fff;
-  border: 2px solid #ccc;
   box-sizing: border-box;
 }
 
-iframe {
-  margin-top: 20px;
-  border: none;
-  z-index: 10;
-  display: none;
+.gameover,
+.victory {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0); /* Inicialmente invisível e em escala 0 */
+  opacity: 0;
+  transition: transform 0.8s ease-out, opacity 0.8s ease-out; /* Animação de crescimento e surgimento */
+}
+
+.gameover.active,
+.victory.active {
+  transform: translate(-50%, -50%) scale(1); /* Cresce para o tamanho normal */
+  opacity: 1; /* Torna-se visível */
 }
